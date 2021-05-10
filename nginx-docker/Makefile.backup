@@ -1,0 +1,28 @@
+TEMPLATE_NAME ?= nginx
+IMAGE_NAME ?= sea5727/$(TEMPLATE_NAME):dev
+#@docker build -t $(IMAGE_NAME) .
+
+image:
+	@docker pull nginx
+
+bash:
+	@docker build -t $(IMAGE_NAME) .
+	@docker run -it -t --name $(TEMPLATE_NAME) -p 80:80 -p 443:443 $(IMAGE_NAME) /bin/bash
+
+run: 
+	@docker build -t $(IMAGE_NAME) .
+	@docker run -d -it --name $(TEMPLATE_NAME) -p 80:80 -p 443:443 $(IMAGE_NAME) nginx
+
+stop:
+	@docker stop $(TEMPLATE_NAME)
+
+rm:
+	@docker rm $(TEMPLATE_NAME)
+
+rmi:
+	@docker rmi $(IMAGE_NAME)
+
+clean:
+	@docker stop $(TEMPLATE_NAME)
+	@docker rm $(TEMPLATE_NAME)
+	@docker rmi $(IMAGE_NAME)
