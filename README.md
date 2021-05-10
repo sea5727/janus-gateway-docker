@@ -22,8 +22,3 @@ make run
 
 # TODO
 DockerCompose
-
-
-
-# janus-gateway-docker
-# janus-gateway-docker
